@@ -20,8 +20,11 @@ class FileUploaderMiddleware {
         throw new Error(`User doesn't own this file or file doesn't exist`);
 
       if (existsSync(fileDbData.file_path)) {
-        access(fileDbData.file_path, constants.R_OK | constants.W_OK, (err) => {
-        });
+        access(
+          fileDbData.file_path,
+          constants.R_OK | constants.W_OK,
+          (err) => {}
+        );
       }
       req.fileDate = fileDbData;
 
