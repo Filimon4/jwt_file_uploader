@@ -24,7 +24,7 @@ DB_DATABASE='my_database'
 
 APP_PORT = '3000'
 
-UPLOAD_DIR = 'C:/Users/1/Desktop/test_aero2/uploads'
+UPLOAD_DIR = 'абсолютный_путь'
 UPLOAD_MAX_FILE_SIZE = '10485760'
 
 REDIS_URL= 'redis://redis_test:6379'
