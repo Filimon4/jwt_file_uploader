@@ -29,8 +29,10 @@ class AuthMiddleware {
         getUserSession(user.id),
         user.sessionId
       );
-      if (!sessionData) throw new Error("There is not session data");
-      req.redisSessionData = JSON.parse(sessionData);
+      if (!sessionData) throw new Error(`There is not sessionData`)
+      const parsedSessionData = JSON.parse(sessionData)
+      JWT.assertPairJwtTokens(parsedSessionData)
+      req.redisSessionData = parsedSessionData;
 
       const { accessToken: oldAccessToken } = JSON.parse(sessionData);
       await redisClient.set(
@@ -43,7 +45,7 @@ class AuthMiddleware {
 
       next();
     } catch (error) {
-      sendError(res, { message: "Filed to invalidateAccessToken" });
+      sendError(res, error);
     }
   }
 
@@ -75,7 +77,7 @@ class AuthMiddleware {
 
       next();
     } catch (error) {
-      sendError(res, { message: "Filed to checkAuth" });
+      sendError(res, error);
     }
   }
 }

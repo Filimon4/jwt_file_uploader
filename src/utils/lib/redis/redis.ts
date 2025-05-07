@@ -35,13 +35,13 @@ class RedisClient {
         await redisClient.connect();
         console.log("Connected to Redis");
         break;
-      } catch (err) {
+      } catch (error) {
         attempts++;
         console.log(`Redis connection failed. Attempt ${attempts}/10`);
         if (attempts < 10) {
           await new Promise((resolve) => setTimeout(resolve, 5000)); // Задержка в 5 секунд
         } else {
-          throw new Error("Failed to connect to Redis after 10 attempts");
+          throw new Error(`Failed to connect to Redis after 10 attempts, ${error}`);
         }
       }
     }

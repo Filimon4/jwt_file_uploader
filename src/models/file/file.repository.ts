@@ -70,6 +70,12 @@ class FileRepository {
     if (!file) throw new Error(`There is not file ${fileId}`);
     await DB.getRepository(File).remove(file);
   }
+
+  static assertDbFile(data: unknown): asserts data is File {
+    if (!data || typeof data !== 'object') throw new Error(`Is not a file`);
+    const dataFile = data as File
+    if (!dataFile.file_path || !dataFile.id || !dataFile.size || !dataFile.user_id) throw new Error(`Is not a File`)
+  }
 }
 
 export default FileRepository;

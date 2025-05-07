@@ -14,29 +14,25 @@ class FileService {
       throw new Error("Backup failed. Aborting delete.");
     }
 
-    try {
-      await DB.dataSource.transaction(async (em) => {
-        const fileRepo = em.getRepository(File);
-        try {
-          await fileRepo.remove(file);
-        } catch (err) {
-          console.error("DB delete failed:", err);
-          throw new Error("Failed to delete record in DB.");
-        }
-        try {
-          await access(file.file_path, constants.R_OK | constants.W_OK);
-          await unlink(file.file_path);
-        } catch (err) {
-          console.error("Failed to delete file from disk:", err);
-          throw new Error(
-            "File deleted from DB, but could not delete from disk."
-          );
-        }
-      });
-      await unlink(backupPath);
-    } catch (error) {
-      throw error;
-    }
+    await DB.dataSource.transaction(async (em) => {
+      const fileRepo = em.getRepository(File);
+      try {
+        await fileRepo.remove(file);
+      } catch (err) {
+        console.error("DB delete failed:", err);
+        throw new Error("Failed to delete record in DB.");
+      }
+      try {
+        await access(file.file_path, constants.R_OK | constants.W_OK);
+        await unlink(file.file_path);
+      } catch (err) {
+        console.error("Failed to delete file from disk:", err);
+        throw new Error(
+          "File deleted from DB, but could not delete from disk."
+        );
+      }
+    });
+    await unlink(backupPath);
   }
 
   static async updateFile(userId: string, file: File, newfile: Express.Multer.File) {
@@ -49,7 +45,7 @@ class FileService {
     });
     newDbFile.id = file.id
     const newDBFile = await FileRepository.saveOrUpdateFile(newDbFile);
-    
+
     await unlink(file.file_path)
     
     return newDBFile

@@ -8,26 +8,26 @@ class AuthController {
   static async signin(req: Request, res: Response) {
     try {
       const { id, password } = req.body;
-      if (!id || !password) throw new Error(`Missing fileds`); //TODO: Записать в DTO
+      if (!id || !password) throw new Error(`Missing fields`);
 
       const tokens = await AuthService.signin(id, password);
 
-      sendResponse(res, tokens);
+      sendResponse(res, JSON.stringify(tokens));
     } catch (error) {
-      sendError(res, { message: "Error in signin" });
+      sendError(res, error);
     }
   }
 
   static async signup(req: Request, res: Response) {
     try {
       const { id, password } = req.body;
-      if (!id || !password) throw new Error(`Missing fileds`); //TODO: Записать в DTO
+      if (!id || !password) throw new Error(`Missing fields`);
 
-      const newUser = await AuthService.signup(id, password)
+      const tokens = await AuthService.signup(id, password)
 
-      sendResponse(res, newUser);
+      sendResponse(res, JSON.stringify(tokens));
     } catch (error) {
-      sendError(res, { message: "Error in signup" });
+      sendError(res, error);
     }
   }
 
@@ -40,7 +40,7 @@ class AuthController {
 
       sendResponse(res, token);
     } catch (error) {
-      sendError(res, { message: "Error in signin" });
+      sendError(res, error);
     }
   }
 
@@ -53,7 +53,7 @@ class AuthController {
 
       sendResponse(res, info);
     } catch (error) {
-      sendError(res, { message: "Error in signin" });
+      sendError(res, error);
     }
   }
 
@@ -66,7 +66,7 @@ class AuthController {
 
       sendResponse(res, "signin successfully");
     } catch (error) {
-      sendError(res, { message: "Error in signin" });
+      sendError(res, error);
     }
   }
 
@@ -79,7 +79,7 @@ class AuthController {
 
       sendResponse(res, "signin successfully");
     } catch (error) {
-      sendError(res, { message: "Error in signin" });
+      sendError(res, error);
     }
   }
 

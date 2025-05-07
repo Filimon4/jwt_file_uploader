@@ -19,7 +19,7 @@ class FileUploaderController {
 
       sendResponse(res, "Delete file");
     } catch (error) {
-      sendError(res, { message: "Fail in deleteFile" });
+      sendError(res, error);
     }
   }
 
@@ -33,9 +33,10 @@ class FileUploaderController {
       if (!oldFile) throw new Error(`There is not file`);
       
 
-      let newFile;
+      let newFile: unknown;
       try {
         newFile = await FileService.updateFile(user.id, oldFile, file);
+        FileRepository.assertDbFile(newFile)
       } catch (error) {
         if (file?.path) {
           try {
@@ -46,10 +47,10 @@ class FileUploaderController {
         }
         throw error
       }
-
-      sendResponse(res, newFile);
+      
+      sendResponse(res, JSON.stringify(newFile));
     } catch (error) {
-      sendError(res, { message: "Failed in updateFile" });
+      sendError(res, error);
     }
   }
 
@@ -66,7 +67,7 @@ class FileUploaderController {
 
       res.download(filePath);
     } catch (error) {
-      sendError(res, { message: "Fail in deleteFile" });
+      sendError(res, error);
     }
   }
 
@@ -79,7 +80,7 @@ class FileUploaderController {
 
       const newFile = await FileService.uploadFile(user.id, file);
 
-      sendResponse(res, newFile);
+      sendResponse(res, JSON.stringify(newFile));
     } catch (error) {
       if (file?.path) {
         try {
@@ -89,7 +90,7 @@ class FileUploaderController {
         }
       }
 
-      sendError(res, { message: "Failed in uploadFile" });
+      sendError(res, error);
     }
   }
 
@@ -103,9 +104,9 @@ class FileUploaderController {
 
       const file = await FileService.fileInfo(user.id, Number(fileId));
 
-      sendResponse(res, file);
+      sendResponse(res, JSON.stringify(file));
     } catch (error) {
-      sendError(res, { message: "Fail in fileInfo" });
+      sendError(res, error);
     }
   }
 
@@ -126,9 +127,9 @@ class FileUploaderController {
         Number(page)
       );
 
-      sendResponse(res, files);
+      sendResponse(res, JSON.stringify(files));
     } catch (error) {
-      sendError(res, { message: "Fail in listFiles" });
+      sendError(res, error);
     }
   }
 }

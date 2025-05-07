@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { access, existsSync, constants, unlink } from "fs";
+import { access, existsSync, constants } from "fs";
 import FileRepository from "@models/file/file.repository.js";
 import UserRepository from "@models/user/user.repository.js";
 import sendError from "@utils/lib/responseHelpers/error.js";
@@ -21,14 +21,14 @@ class FileUploaderMiddleware {
         access(
           fileDbData.file_path,
           constants.R_OK | constants.W_OK,
-          (err) => {}
+          () => {}
         );
       }
       req.fileDate = fileDbData;
 
       next();
     } catch (error) {
-      sendError(res, { message: "Fail in check uploadFile" });
+      sendError(res, error);
     }
   }
 }
