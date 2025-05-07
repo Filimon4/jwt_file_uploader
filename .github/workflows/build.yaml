@@ -1,0 +1,27 @@
+name: Multi OS build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'  # Замените на вашу версию Node.js
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run build
+        run: npm build
