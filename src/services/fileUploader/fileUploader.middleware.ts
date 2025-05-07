@@ -10,11 +10,9 @@ class FileUploaderMiddleware {
       const user = req.user;
       UserRepository.assertUser(user);
 
-      // fileId
       const { id: fileId } = req.params;
       if (isNaN(Number(fileId))) throw new Error(`FileId is not a number`);
 
-      // Db data
       const fileDbData = await FileRepository.getFile(user.id, Number(fileId));
       if (!fileDbData)
         throw new Error(`User doesn't own this file or file doesn't exist`);

@@ -40,7 +40,6 @@ class FileService {
   }
 
   static async updateFile(userId: string, file: File, newfile: Express.Multer.File) {
-    //create new
     const newDbFile = await FileRepository.createDBFile({
       file_path: newfile.path,
       mime_type: newfile.mimetype,
@@ -50,7 +49,7 @@ class FileService {
     });
     newDbFile.id = file.id
     const newDBFile = await FileRepository.saveOrUpdateFile(newDbFile);
-    // delete old
+    
     await unlink(file.file_path)
     
     return newDBFile

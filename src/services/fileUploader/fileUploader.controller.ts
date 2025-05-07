@@ -25,7 +25,6 @@ class FileUploaderController {
 
   static async updateFile(req: Request, res: Response) {
     try {
-      // data 
       const file = req.file;
       const oldFile = req.fileDate
       const user = req.user;
@@ -34,7 +33,6 @@ class FileUploaderController {
       if (!oldFile) throw new Error(`There is not file`);
       
 
-      // update data
       let newFile;
       try {
         newFile = await FileService.updateFile(user.id, oldFile, file);

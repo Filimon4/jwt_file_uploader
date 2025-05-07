@@ -16,14 +16,12 @@ class AuthService {
     if (!await Hash.comparePasswords(password, existUser.password))
       throw new Error("Wrong password");
 
-    // jwt
     const sessionId = crypto.randomUUID();
     const tokens = JWT.generatePairTokens({
       id: existUser.id,
       sessionId: sessionId,
     });
 
-    // redis
     const redisClient = await RedisClient.getRedisClient() 
     await redisClient.hSetNX(
       getUserSession(existUser.id),
@@ -45,14 +43,12 @@ class AuthService {
     });
     const newUser = await UserRepository.insertOneUser(dbUser);
 
-    // jwt
     const sessionId = crypto.randomUUID();
     const tokens = JWT.generatePairTokens({
       id: newUser.id,
       sessionId: sessionId,
     });
 
-    //redis
     const redisClient = await RedisClient.getRedisClient();
     await redisClient.hSet(
       getUserSession(newUser.id),
@@ -65,7 +61,6 @@ class AuthService {
 
   static async newToken(refreshToken: string) {
     const redisClient = await RedisClient.getRedisClient();
-    // user
     const user = JWT.verifyToken(refreshToken);
     UserRepository.assertUser(user);
 
@@ -99,12 +94,10 @@ class AuthService {
   static async logout(id: string, sessionId: string) {
     const redisClient = await RedisClient.getRedisClient();
 
-    // session
     const sessionData = await redisClient.hGet(getUserSession(id), sessionId);
     if (!sessionData) throw new Error(`There is not sessionData`);
     const { accessToken, refreshToken } = JSON.parse(sessionData);
 
-    //redis
     await redisClient.set(getBlacklistToken(accessToken), TokenStatus.revoked);
     await redisClient.set(getBlacklistToken(refreshToken), TokenStatus.revoked);
     await redisClient.hDel(getUserSession(id), sessionId);
@@ -113,7 +106,6 @@ class AuthService {
   static async logoutAll(id: string, sessionId: string) {
     const redisClient = await RedisClient.getRedisClient();
 
-    // session
     const sessionData = await redisClient.hGet(getUserSession(id), sessionId);
     if (!sessionData) throw new Error(`There is not sessionData`);
 
