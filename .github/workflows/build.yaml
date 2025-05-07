@@ -18,10 +18,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'  # Замените на вашу версию Node.js
+          node-version: '20'
 
       - name: Install dependencies
         run: npm install
 
       - name: Run build
-        run: npm build
+        run: npm run build
