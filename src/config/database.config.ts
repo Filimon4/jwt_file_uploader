@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
-import { User } from "../models/user/user.entity.js";
-import { File } from "../models/file/file.entity.js";
+import { User } from "@models/user/user.entity.js";
+import { File } from "@models/file/file.entity.js";
 
 import { config } from "dotenv";
 config()

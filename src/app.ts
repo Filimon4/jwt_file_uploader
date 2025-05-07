@@ -1,13 +1,13 @@
 import express from "express";
 import cors from "cors";
-import corsConfig from "./config/cors.config.js";
-import routes from "./routes/index.js";
-import DB from "./models/index.js";
+import corsConfig from "@config/cors.config.js";
+import routes from "@src/routes/index.js";
+import DB from "@models/index.js";
 
 import "reflect-metadata";
 
-import globalErrorHandler from "./middleware/globalErrorHandler.js";
-import globalUaParser from "./middleware/globalUaParser.js";
+import globalErrorHandler from "@src/middleware/globalErrorHandler.js";
+import globalUaParser from "@src/middleware/globalUaParser.js";
 
 import { config } from "dotenv";
 config();

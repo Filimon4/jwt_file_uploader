@@ -1,4 +1,4 @@
-import DBDataSource from "../config/database.config.js";
+import DBDataSource from "@config/database.config.js";
 import { DataSource, EntitySchema, ObjectLiteral, ObjectType } from "typeorm";
 
 type Repo<Entity> = ObjectType<Entity> | EntitySchema<Entity> | string;

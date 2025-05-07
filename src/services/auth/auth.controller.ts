@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import sendError from "../../utils/lib/responseHelpers/error.js";
+import sendError from "@utils/lib/responseHelpers/error.js";
 import AuthService from "./auth.service.js";
-import sendResponse from "../../utils/lib/responseHelpers/response.js";
-import UserRepository from "../../models/user/user.repository.js";
+import sendResponse from "@utils/lib/responseHelpers/response.js";
+import UserRepository from "@models/user/user.repository.js";
 
 class AuthController {
   static async signin(req: Request, res: Response) {

@@ -16,9 +16,16 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "rootDir": "./src",
+    "rootDir": ".",
     "outDir": "./dist",
-    "strictPropertyInitialization": false
+    "strictPropertyInitialization": false,
+    "paths": {
+      "@config/*": ["./src/config/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@src/*": ["./src/*"],
+      "@models/*": ["./src/models/*"],
+      "@services/*": ["./src/services/*"],
+    }
   },
   "include": ["./src"],
   "exclude": ["./node_modules/**", "./dist/**"]

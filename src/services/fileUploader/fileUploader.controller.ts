@@ -1,11 +1,10 @@
 import { Request, Response } from "express";
-import FileRepository from "../../models/file/file.repository.js";
-import UserRepository from "../../models/user/user.repository.js";
-import MulterStorage from "../../utils/lib/multer/multer.js";
-import sendError from "../../utils/lib/responseHelpers/error.js";
-import sendResponse from "../../utils/lib/responseHelpers/response.js";
+import FileRepository from "@models/file/file.repository.js";
+import UserRepository from "@models/user/user.repository.js";
+import MulterStorage from "@utils/lib/multer/multer.js";
+import sendError from "@utils/lib/responseHelpers/error.js";
+import sendResponse from "@utils/lib/responseHelpers/response.js";
 import FileService from "./fileUploader.service.js";
-import assert from "assert";
 import { unlink } from "fs/promises";
 
 class FileUploaderController {

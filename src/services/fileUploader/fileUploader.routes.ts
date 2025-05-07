@@ -2,8 +2,8 @@ import * as express from "express";
 
 import FileUploaderMiddleware from "./fileUploader.middleware.js";
 import FileUploader from "./fileUploader.controller.js";
-import AuthMiddleware from "../auth/auth.middleware.js";
-import MulterStorage from "../../utils/lib/multer/multer.js";
+import AuthMiddleware from "@services/auth/auth.middleware.js";
+import MulterStorage from "@utils/lib/multer/multer.js";
 
 const router = express.Router({
   mergeParams: true,

@@ -1,5 +1,5 @@
-import { UserPayload } from "../../utils/jwt/jwt.types.js";
-import DB from "../index.js";
+import { UserPayload } from "@utils/jwt/jwt.types.js";
+import DB from "@models/index.js";
 import { User } from "./user.entity.js";
 
 class UserRepository {

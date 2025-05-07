@@ -7,7 +7,7 @@ import {
   UpdateDateColumn,
   CreateDateColumn,
 } from "typeorm";
-import { User } from "../user/user.entity.js";
+import { User } from "@models/user/user.entity.js";
 
 @Entity()
 export class File {

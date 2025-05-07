@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { access, existsSync, constants, unlink } from "fs";
-import FileRepository from "../../models/file/file.repository.js";
-import UserRepository from "../../models/user/user.repository.js";
-import sendError from "../../utils/lib/responseHelpers/error.js";
+import FileRepository from "@models/file/file.repository.js";
+import UserRepository from "@models/user/user.repository.js";
+import sendError from "@utils/lib/responseHelpers/error.js";
 
 class FileUploaderMiddleware {
   static async checkFileExist(req: Request, res: Response, next: NextFunction) {

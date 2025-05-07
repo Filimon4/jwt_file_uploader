@@ -1,14 +1,14 @@
 import { NextFunction } from "express";
 import { Request, Response } from "express";
-import UserRepository from "../../models/user/user.repository.js";
-import JWT from "../../utils/jwt/jwt.utils.js";
-import RedisClient from "../../utils/lib/redis/redis.js";
+import UserRepository from "@models/user/user.repository.js";
+import JWT from "@utils/jwt/jwt.utils.js";
+import RedisClient from "@utils/lib/redis/redis.js";
 import {
   getBlacklistToken,
   getUserSession,
   TokenStatus,
-} from "../../utils/lib/redis/redis.utils.js";
-import sendError from "../../utils/lib/responseHelpers/error.js";
+} from "@utils/lib/redis/redis.utils.js";
+import sendError from "@utils/lib/responseHelpers/error.js";
 
 class AuthMiddleware {
   static async invalidateAccessToken(

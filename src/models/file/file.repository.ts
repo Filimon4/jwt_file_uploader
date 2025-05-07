@@ -1,4 +1,4 @@
-import DB from "../index.js";
+import DB from "@models/index.js";
 import { File } from "./file.entity.js";
 
 class FileRepository {

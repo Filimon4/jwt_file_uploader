@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import jwtConfig from "../../config/jwt.config.js";
+import jwtConfig from "@config/jwt.config.js";
 import { TokenPayload } from "./jwt.types.js";
 
 class JWT {

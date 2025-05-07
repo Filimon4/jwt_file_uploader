@@ -1,8 +1,8 @@
 import { constants } from "fs";
 import { copyFile, access, unlink } from "fs/promises";
-import { File } from "../../models/file/file.entity.js";
-import FileRepository from "../../models/file/file.repository.js";
-import DB from "../../models/index.js";
+import { File } from "@models/file/file.entity.js";
+import FileRepository from "@models/file/file.repository.js";
+import DB from "@models/index.js";
 
 class FileService {
   static async deleteFile(userId: string, file: File) {
