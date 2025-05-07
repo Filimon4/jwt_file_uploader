@@ -1,2 +1,31 @@
-<h3>Установка</h3>
+<h2>Установка</h2>
 
+Создайте файл .env по примеру с .env.example
+
+В нём заполните все поля. UPLOAD_DIR - абсолютный путь
+
+Запускает докер
+```
+docker-compose up --build
+```
+либо через ide
+
+
+<h3>Пример .env файла для докера</h3>
+
+```
+NODE_ENV = 'develop'
+
+DB_HOST='mysql_test'
+DB_PORT='3306'
+DB_USERNAME='my_user'
+DB_PASSWORD='my_password'
+DB_DATABASE='my_database'
+
+APP_PORT = '3000'
+
+UPLOAD_DIR = 'C:/Users/1/Desktop/test_aero2/uploads'
+UPLOAD_MAX_FILE_SIZE = '10485760'
+
+REDIS_URL= 'redis://redis_test:6379'
+```

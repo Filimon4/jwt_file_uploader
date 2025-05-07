@@ -7,7 +7,6 @@
     "build": "npx tsc",
     "start": "node ./dist/app.js",
     "deploy:dev": "npm run build && npm run start",
-
     "typeorm": "typeorm-ts-node-esm",
     "migration:run": "npm run typeorm migration:run -- -d ./typeorm.config.ts",
     "migration:generate": "npm run typeorm migration:generate -- -d ./typeorm.config.ts ./migrations/InitTable",
@@ -20,7 +19,7 @@
   "description": "",
   "dependencies": {
     "@rollup/plugin-commonjs": "^28.0.3",
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",

@@ -24,7 +24,8 @@ class AuthService {
     });
 
     // redis
-    await RedisClient.getRedisClient().hSetNX(
+    const redisClient = await RedisClient.getRedisClient() 
+    await redisClient.hSetNX(
       getUserSession(existUser.id),
       sessionId,
       JSON.stringify(tokens)
@@ -52,7 +53,8 @@ class AuthService {
     });
 
     //redis
-    await RedisClient.getRedisClient().hSet(
+    const redisClient = await RedisClient.getRedisClient();
+    await redisClient.hSet(
       getUserSession(newUser.id),
       sessionId,
       JSON.stringify(tokens)
