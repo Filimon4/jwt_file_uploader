@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install dependencies
         run: npm install
@@ -31,3 +31,30 @@ jobs:
 
       - name: Run tests
         run: npm run test
+
+      - name: Upload unit test report
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-report-${{ matrix.os }}
+          path: reports/unit.report.json
+  public:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Download unit test reports
+        uses: actions/download-artifact@v4
+        with:
+          name: unit-test-report-ubuntu-latest
+          path: reports/
+
+      - name: Download e2e test reports
+        uses: actions/download-artifact@v4
+        with:
+          name: e2e-test-report-ubuntu-latest
+          path: reports/
+      
+      - name: Publish Test Report
+        uses: ctrf-io/github-test-reporter@v1
+        with:
+          report-path: './reports/*.json'
+        if: always()

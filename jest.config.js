@@ -9,4 +9,11 @@ export default {
       tsconfig: 'tsconfig.json',
     },
   },
+  reporters: [
+    'default',
+    [
+      'jest-ctrf-json-reporter',
+      { outputDir: 'reports', outputFile: 'unit.report.json' },
+    ],
+  ],
 };
