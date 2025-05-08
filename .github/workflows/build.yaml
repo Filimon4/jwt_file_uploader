@@ -46,12 +46,6 @@ jobs:
         with:
           name: unit-test-report-ubuntu-latest
           path: reports/
-
-      - name: Download e2e test reports
-        uses: actions/download-artifact@v4
-        with:
-          name: e2e-test-report-ubuntu-latest
-          path: reports/
       
       - name: Publish Test Report
         uses: ctrf-io/github-test-reporter@v1
